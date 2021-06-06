@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% if user %}
+    <a id="introduce" href="/introduction/introduce" class="btn">소개 등록</a>
+    {% endif %}
+    <div class = "introductions">
+        {% for introduction in introductions %}
+            <div class ="introduction">
+                <div class="introduction-nick">{{introduction.User.nick}}</div>
+                {% if introduction.img %}
+                    <img src="{{introduction.img}}" alt="썸네일"  class="introduction-img">
+                {% endif %}
+                <div class="introduction-content">{{introduction.content}}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

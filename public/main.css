@@ -1,0 +1,338 @@
+/* * :not(script, title) {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  text-align: center;
+  height: 100px;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 100px;
+}
+
+header a {
+  display: block;
+  color: black;
+}
+
+header a :hover {
+  color: black;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+  background-color: green;
+}
+
+li {
+  display: inline-block;
+  margin: 0 5%;
+}
+
+nav a {
+  color: white;
+  display: block;
+  line-height: 40px;
+}
+
+.container {
+  display: flex;
+}
+
+section {
+  overflow-y: visible;
+  height: 600px;
+  width: 70%;
+  margin-right: 1%;
+  padding: 2%;
+}
+
+aside {
+  padding: 1%;
+  height: 600px;
+  width: 29%;
+  background-color: yellow;
+}
+
+.input-group {
+  margin: 20px 0;
+}
+
+.input-group label {
+  float: left;
+  width: 26%;
+}
+
+.input-group input {
+  float: right;
+  width: 72%;
+}
+
+.qna {
+  border: 1px solid silver;
+  margin-top: 10px;
+  padding: 1%;
+  border-radius: 10px;
+}
+
+.qna-title {
+  font-weight: 1000;
+  text-align: center;
+  font-size: 20px;
+}
+
+.qna-title a {
+  color: black;
+}
+
+.qna-auther {
+  font-size: 15px;
+  text-align: right;
+}
+
+.qna-date {
+  font-size: 13px;
+  text-align: right;
+}
+
+.qna-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#ask-form {
+  margin-top: 1%;
+}
+
+#title-label {
+  display: inline-block;
+  width: 19%;
+  text-align: center;
+}
+
+#ask-title {
+  width: 80%;
+  float: right;
+}
+
+.ask-head {
+  padding-bottom: 1%;
+  border-bottom: 1px solid silver;
+}
+
+#ask-content {
+  margin-top: 1%;
+  resize: none;
+  height: 150px;
+  width: 100%;
+}
+
+#content-label {
+  display: inline-block;
+  width: 19%;
+  text-align: center;
+}
+
+.ask-body {
+  padding-top: 1%;
+}
+
+.btn {
+  text-align: center;
+  display: inline-block;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid silver;
+  width: 80px;
+  height: 37px;
+  line-height: 37px;
+  font-size: 12px;
+}
+
+#join {
+  margin-left: 25px;
+}
+
+#login {
+  margin-right: 25px;
+  float: right;
+}
+
+.question {
+  border-bottom: 1px solid silver;
+  padding-bottom: 50px;
+  margin-bottom: 20px;
+}
+
+#question-remove,
+#question-edit {
+  width: 50px;
+  height: 25px;
+  line-height: 25px;
+  margin-left: 1%;
+  float: right;
+}
+
+.question-title {
+  font-size: 30px;
+  text-align: center;
+  font-weight: 1000;
+  height: 50px;
+  line-height: 50px;
+}
+
+.question-auther {
+  margin-top: 1%;
+  font-size: 16px;
+  text-align: right;
+}
+
+.question-date {
+  font-size: 14px;
+  text-align: right;
+  margin-bottom: 1%;
+}
+
+.question-content {
+  overflow: initial;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+#answer-form {
+  height: 70px;
+  border: 1px solid silver;
+  margin-bottom: 20px;
+}
+
+#answer-content {
+  display: inline-block;
+  height: 70px;
+  width: 80%;
+  resize: none;
+}
+
+#answer-btn {
+  height: 70px;
+  width: 20%;
+  float: right;
+  font-size: 15px;
+}
+
+.answer {
+  margin-bottom: 2%;
+}
+
+.answer-header {
+  overflow: hidden;
+  margin-bottom: 1%;
+}
+
+.answer-auther {
+  float: left;
+}
+
+.answer-date {
+  float: right;
+}
+
+#introduce-label {
+  margin-bottom: 2%;
+}
+
+#introduce-content {
+  width: 100%;
+  height: 300px;
+  resize: none;
+  margin-bottom: 2%;
+}
+
+#introduce-btn {
+  margin-top: 2%;
+}
+
+.introductions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.introduction {
+  width: 32%;
+  margin: 0.6%;
+  height: 200px;
+  border: 1px solid silver;
+  border-radius: 10px;
+}
+
+.introduction-img {
+  max-height: 75%;
+  width: auto;
+} */
+
+img {
+  height: 100%;
+  width: auto;
+}
+
+#qna-head {
+  padding-top: 7px;
+  padding-bottom: 4px;
+}
+
+#qna-title {
+  margin: 0;
+}
+
+#qna-title a {
+  text-decoration: none;
+  color: black;
+}
+
+#qna-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 1%;
+}
+
+#content-label {
+  margin-top: 2%;
+}
+
+#ask-btn {
+  margin-top: 1%;
+}
+
+#question-content {
+  padding: 2%;
+}
+
+.answer {
+  margin-top: 1.5%;
+}
+
+.answer-date {
+  float: right;
+}
+
+#edit-button {
+  margin-top: 2%;
+}

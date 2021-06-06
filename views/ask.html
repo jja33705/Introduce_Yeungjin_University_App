@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% if question %}
+    <form id="ask-form" action="/qna" method="GET">
+        <div class="ask-head">
+            <label for="ask-title">제목</label>
+            <input type="text" value="{{question.title}}" id="ask-title" class="form-control" maxlength="30" placeholder="title" name="title" required>
+        </div>
+        <div class="ask-body">
+            <label for="ask-content" id="content-label">내용</label>
+            <textarea id="ask-content" name="content" class="form-control" maxlength="300" rows="8" required>{{question.content}}</textarea>
+        </div>
+        <button id="edit-btn" class="btn btn-default" type="submit" onclick="editQuestion()">수정하기</button>
+    </form>
+    <a href="/qna" class="btn btn-default pull-right" onclick="editQuestion(`{{question.id}}`)">수정</a>
+    {% else %}
+    <form action="/qna/ask" method="POST">
+        <div class="ask-head">
+            <label for="ask-title">제목</label>
+            <input type="text" class="form-control" maxlength="30" placeholder="title" name="title" required>
+        </div>
+        <div class="ask-body">
+            <label for="ask-content">내용</label>
+            <textarea name="content" class="form-control" maxlength="300" rows="8" required></textarea>
+        </div>
+        <button id="ask-btn" class="btn btn-default" type="submit"> 작성</button>
+    </form>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script>
+         function editQuestion(questionId) {
+            const title = document.querySelector('#ask-title').value;
+            const content = document.querySelector('#ask-content').value;
+            axios.patch(`/qna/ask/${questionId}`, {title: title, content: content});
+            alert('질문이 수정되었습니다.');
+        };
+    </script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% if user %}
+        <a href="/qna/ask" id="question-a" class="btn">질문하기</a>
+    {% endif %}
+    {% for question in questions %}
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix" id="qna-head">
+                <h4 class="text-center" id="qna-title"><a href="/qna/{{question.id}}">{{question.title}}</a></h4>
+                <div class="text-left pull-left">{{question.User.nick}}</div>
+                <div id="qna-date" class="text-right pull-right">{{question.updatedAt}}</div>
+            </div>
+            <div id="qna-content" class="panel-body">{{question.content}}</div>
+        </div>
+    {% endfor %}
+{% endblock %}
