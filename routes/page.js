@@ -1,6 +1,6 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const { Question, User, Introduction } = require('../models');
+const { Question, User, Introduction, Japan } = require('../models');
 const  sequelize = require('sequelize');
 
 const router = express.Router();
@@ -20,6 +20,7 @@ router.get('/introduction', async (req, res, next) => {
             include: {
                 model: User,
             },
+            order: [['updatedAt', 'DESC']],
         });
         res.render('introduction.html', { title: "자기소개", introductions: introductions });
     } catch (error) {
@@ -28,8 +29,26 @@ router.get('/introduction', async (req, res, next) => {
     }
 });
 
-router.get('/japan', (req, res, next) => {
-    res.render('japan.html', { title: '현지학기제' });
+router.get('/japan', async (req, res, next) => {
+    try {
+        const japans = await Japan.findAll({
+            attributes: [
+                'id',
+                'title', 
+                [sequelize.fn('date_format', sequelize.col('Japan.updatedAt'), '%Y-%m-%d'), 'updatedAt'], 
+                'content', 'img'
+            ],
+            include: {
+                model: User,
+            },
+            order: [['updatedAt', 'DESC']],
+        });
+        res.render('japan.html', { title: '현지학기제' , japans: japans});
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+    
 });
 
 router.get('/qna', async (req, res, next) => {

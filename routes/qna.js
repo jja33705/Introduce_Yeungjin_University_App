@@ -17,7 +17,7 @@ router.post('/ask', isLoggedIn, async (req, res, next) => {
             content: req.body.content,
             title: req.body.title,
             UserId: req.user.id,
-        })
+        });
         res.redirect(`/qna/${question.id}`);
     } catch (error) {
         console.error(error);
@@ -68,7 +68,7 @@ router.get('/:id', async (req, res, next) => {
             const answers = await question.getAnswers({
                 attributes: [
                     [sequelize.fn('date_format', sequelize.col('Answer.updatedAt'), '%Y-%m-%d'), 'updatedAt'], 
-                    'content',
+                    'content', 'id'
                 ],
                 include: {
                     model: User,
@@ -85,7 +85,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.delete('/:id', isLoggedIn, async (req, res, next) => {
+router.delete('/question/:id', isLoggedIn, async (req, res, next) => {
     try{
         await Question.destroy({ where: { id: req.params.id }});
     } catch (error) {
@@ -97,21 +97,27 @@ router.delete('/:id', isLoggedIn, async (req, res, next) => {
 router.post('/:id/answer', isLoggedIn, async (req, res, next) => {
     const questionId = req.params.id;
     try {
-        question = await Question.findOne({ where : { id: questionId }});
-        if (question) {
-            await Answer.create({
-                QuestionId: questionId,
-                content: req.body.content,
-                UserId: req.user.id,
-            })
-            res.redirect(`/qna/${questionId}`);
-        } else {
-            return res.redirect('/qna?error=noExist');
-        }
+        await Answer.create({
+            QuestionId: questionId,
+            content: req.body.content,
+            UserId: req.user.id,
+        });
+        res.redirect(`/qna/${questionId}`);
     } catch (error) { 
         console.error(error);
         next(err);
     }
-})
+});
+
+router.delete('/answer/:id', isLoggedIn, async (req, res, next) => {
+    try{
+        await Answer.destroy({ where: { id: req.params.id }});
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+
 
 module.exports = router;

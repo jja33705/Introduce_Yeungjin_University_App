@@ -29,6 +29,13 @@
     {% endif %}
     {% for answer in answers %}
         <div class="answer">
+            {% if answer.User.nick == user.nick %}
+            <div class="clearfix">
+                <span class="pull-right"><a href="/qna/{{question.id}}" onclick="editAnswer(`{{answer.id}}`)">수정</a></span>
+                <span class="pull-right">&nbsp;&nbsp;</span>
+                <span class="pull-right"><a href="/qna/{{question.id}}" onclick="removeAnswer(`{{answer.id}}`);">삭제</a></span>
+            </div>
+            {% endif %}
             <div class="answer-header">
                 <span class="answer-auther">{{answer.User.nick}}</span>
                 <span class="answer-date">{{answer.updatedAt}}</span>
@@ -41,8 +48,19 @@
 {% block script %}
     <script>
         function removeQuestion(questionId) {
-            axios.delete(`/qna/${questionId}`);
-            alert('질문이 삭제되었습니다.');
+            if (confirm('질문을 삭제하시겠습니까?')) {
+                axios.delete(`/qna/question/${questionId}`);
+            }
+        };
+
+        function removeAnswer(answerId) {
+            if (confirm('답변을 삭제하시겠습기까?')) {
+                axios.delete(`/qna/answer/${answerId}`);
+            }
+        };
+
+        function editAnswer(answerId) {
+            
         }
     </script>
 {% endblock %}

@@ -336,3 +336,31 @@ img {
 #edit-button {
   margin-top: 2%;
 }
+
+#upload-img {
+  margin: 2% 0;
+}
+
+#introduction-caption {
+  word-wrap: break-word;
+}
+
+#introduction-caption a {
+  color: black;
+  text-decoration: none;
+}
+
+#japan-body {
+  overflow: hidden;
+}
+
+#japan-img {
+}
+
+#japan-date {
+}
+
+#japan-content {
+  overflow: hidden;
+  word-wrap: break-word;
+}

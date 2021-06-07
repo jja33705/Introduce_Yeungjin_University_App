@@ -1,19 +1,40 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <form id="introduce-form" action="/introduction/introduce" method="post">
+    {% if introduction %}
+    <form id="introduce-form" action="/introduction" method="GET">
         <label for="introduce-content" id="introduce-label">자기소개</label>
-        <textarea id="introduce-content" name="content" maxlength="300" required></textarea>
+        <textarea id="introduce-content" name="content" class="form-control" maxlength="300" rows="8" required>{{introduction.content}}</textarea>
         <div class="img-preview">
+            {% if introduction.img %}
+            <img id="img-preview" src="{{introduction.img}}" width="250" alt="미리보기">
+            {% else %}
             <img id="img-preview" src="" style="display: none;" width="250" alt="미리보기">
+            {% endif %}
             <input id="img-url" type="hidden" name="url">
         </div>
-        <div>
+        <div id="upload-img">
             <label id="img-label" for="img">사진 업로드</label>
             <input id="img" type="file" accept="image/*">
         </div>
-        <button id="introduce-btn" type="submit" class="btn">소개 등록</button>
+        <a href="/introduction" class="btn btn-default" onclick="editIntroduction(`{{introduction.id}}`)">소개 수정</a>
     </form>
+    {% else %}
+    <form id="introduce-form" action="/introduction/introduce" method="post">
+        <label for="introduce-content" >자기소개</label>
+        <textarea name="content" class="form-control" maxlength="300" rows="8" required></textarea>
+        <div class="img-preview">
+            <img id="img-preview" src=""
+            style="display: none;" width="250" alt="미리보기">
+            <input id="img-url" type="hidden" name="url">
+        </div>
+        <div id="upload-img">
+            <label id="img-label" for="img">사진 업로드</label>
+            <input id="img" type="file" accept="image/*">
+        </div>
+        <button id="introduce-btn" type="submit" class="btn btn-default">소개 등록</button>
+    </form>
+    {% endif %}
 {% endblock %}
 
 {% block script %}
@@ -33,5 +54,11 @@
                 console.error(err);
             });
         });
+
+        function editIntroduction(introductionId) {
+            const content = document.querySelector('#introduce-content').value;
+            const url = document.querySelector('#img-url').value;
+            axios.patch(`/introduction/${introductionId}`, { content: content, url: url });
+        }
     </script>
 {% endblock %}

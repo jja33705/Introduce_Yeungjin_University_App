@@ -33,5 +33,6 @@ module.exports = class User extends Sequelize.Model {
         db.User.hasMany(db.Question);
         db.User.hasMany(db.Answer);
         db.User.hasOne(db.Introduction, { foreignKey: 'UserId', sourceKey: 'id' });
+        db.User.hasMany(db.Japan);
     }
 }

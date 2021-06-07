@@ -11,9 +11,8 @@
             <label for="ask-content" id="content-label">내용</label>
             <textarea id="ask-content" name="content" class="form-control" maxlength="300" rows="8" required>{{question.content}}</textarea>
         </div>
-        <button id="edit-btn" class="btn btn-default" type="submit" onclick="editQuestion()">수정하기</button>
     </form>
-    <a href="/qna" class="btn btn-default pull-right" onclick="editQuestion(`{{question.id}}`)">수정</a>
+    <a href="/qna" class="btn btn-default" onclick="editQuestion(`{{question.id}}`)">수정</a>
     {% else %}
     <form action="/qna/ask" method="POST">
         <div class="ask-head">
@@ -35,7 +34,6 @@
             const title = document.querySelector('#ask-title').value;
             const content = document.querySelector('#ask-content').value;
             axios.patch(`/qna/ask/${questionId}`, {title: title, content: content});
-            alert('질문이 수정되었습니다.');
         };
     </script>
 {% endblock %}

@@ -4,7 +4,7 @@ const router = express.Router();
 const { isLoggedIn } = require('./middlewares');
 const path = require('path');
 const  fs = require('fs');
-const { Introduction } = require('../models');
+const { Introduction, User } = require('../models');
 
 try {
     fs.readdirSync('uploads');
@@ -31,8 +31,20 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
     res.json({ url: `/img/${req.file.filename}` });
 });
 
-router.get('/introduce', isLoggedIn, (req, res, next) => {
-    res.render('introduce.html', {});
+router.get('/:id', isLoggedIn, async (req, res, next) => {
+    try {
+        const introduction = await Introduction.findOne({
+            where: { UserId: req.params.id },
+        });
+        if (introduction) {
+            res.render('introduce.html', { introduction: introduction });
+        } else {
+            res.render('introduce.html', {});
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    };
 });
 
 const upload2 = multer();
@@ -44,6 +56,38 @@ router.post('/introduce', isLoggedIn, upload2.none(), async (req, res, next) => 
             UserId: req.user.id,
         });
         res.redirect('/introduction');
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+router.patch('/:id', async (req, res, next) => {
+    try {
+        if(req.body.url) {
+            await Introduction.update({
+                content: req.body.content,
+                img: req.body.url,
+            }, {
+                where: { id: req.params.id },
+            });
+        } else {
+            await Introduction.update({
+                content: req.body.content,
+            }, {
+                where: { id: req.params.id },
+            });
+        }
+        
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+});
+
+router.delete('/:id', isLoggedIn, async (req, res, next) => {
+    try{
+        await Introduction.destroy({ where: { id: req.params.id }});
     } catch (error) {
         console.error(error);
         next(error);
