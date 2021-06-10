@@ -351,17 +351,44 @@ img {
   text-decoration: none;
 }
 
-#japan-body {
-  overflow: hidden;
+#posting {
+  display: inline-block;
+  margin-bottom: 1%;
+  text-decoration: none;
+}
+
+#japan-panel {
+  display: flex;
+  height: 200px;
 }
 
 #japan-img {
+  height: 100%;
+  width: auto;
 }
 
-#japan-date {
+#japan-body {
+  width: 80%;
+  height: 100%;
+  overflow: hidden;
 }
 
 #japan-content {
-  overflow: hidden;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+#japan-title {
+  color: black;
+  text-decoration: none;
+}
+
+#post-img {
+  height: 400px;
+  width: auto;
+}
+
+#post-content {
+  white-space: normal;
   word-wrap: break-word;
 }

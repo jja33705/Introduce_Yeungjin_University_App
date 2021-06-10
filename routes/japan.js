@@ -2,8 +2,9 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const  sequelize = require('sequelize');
 
-const { Japan } = require('../models');
+const { Japan, User } = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
 const router = express.Router();
@@ -33,6 +34,16 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 router.get('/post/:id', async (req, res, next) => {
     try {
         const japan = await Japan.findOne({
+            attributes: [
+                'id',
+                'title', 
+                [sequelize.fn('date_format', sequelize.col('Japan.updatedAt'), '%Y-%m-%d'), 'updatedAt'], 
+                'content',
+                'img',
+            ],
+            include: {
+                model: User,
+            },
             where: { id: req.params.id },
         });
         res.render('japanPost.html', { japan: japan });
