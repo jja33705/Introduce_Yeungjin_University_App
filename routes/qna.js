@@ -34,12 +34,15 @@ router.get('/ask/:id', isLoggedIn, async (req, res, next) => {
 
 router.patch('/ask/:id', isLoggedIn, async (req, res, next) => {
     try {
-        await Question.update({
-            title: req.body.title,
-            content: req.body.content,
-        }, {
-            where: { id: req.params.id },
-        });
+        const question = await Question.findOne({ where: { id: req.params.id } });
+        if (question.UserId === req.user.id) {
+            await Question.update({
+                title: req.body.title,
+                content: req.body.content,
+            }, {
+                where: { id: req.params.id },
+            });
+        }
     } catch (err) {
         console.error(err);
         next(err);
@@ -87,7 +90,10 @@ router.get('/:id', async (req, res, next) => {
 
 router.delete('/question/:id', isLoggedIn, async (req, res, next) => {
     try{
-        await Question.destroy({ where: { id: req.params.id }});
+        const question = await Question.findOne({ where: { id: req.params.id } });
+        if (question.UserId === req.user.id) {
+            await Question.destroy({ where: { id: req.params.id }});
+        }
     } catch (error) {
         console.error(error);
         next(error);
@@ -111,7 +117,10 @@ router.post('/:id/answer', isLoggedIn, async (req, res, next) => {
 
 router.delete('/answer/:id', isLoggedIn, async (req, res, next) => {
     try{
-        await Answer.destroy({ where: { id: req.params.id }});
+        const answer = await Answer.findOne({ where: { id: req.params.id } });
+        if (answer.UserId === req.user.id) {
+            await Answer.destroy({ where: { id: req.params.id }});
+        }
     } catch (error) {
         console.error(error);
         next(error);

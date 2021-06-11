@@ -64,21 +64,23 @@ router.post('/introduce', isLoggedIn, upload2.none(), async (req, res, next) => 
 
 router.patch('/:id', async (req, res, next) => {
     try {
-        if(req.body.url) {
-            await Introduction.update({
-                content: req.body.content,
-                img: req.body.url,
-            }, {
-                where: { id: req.params.id },
-            });
-        } else {
-            await Introduction.update({
-                content: req.body.content,
-            }, {
-                where: { id: req.params.id },
-            });
+        const introduction = await Introduction.findOne({ where: { id: req.params.id } });
+        if (introduction.UserId === req.user.id) {
+            if(req.body.url) {
+                await Introduction.update({
+                    content: req.body.content,
+                    img: req.body.url,
+                }, {
+                    where: { id: req.params.id },
+                });
+            } else {
+                await Introduction.update({
+                    content: req.body.content,
+                }, {
+                    where: { id: req.params.id },
+                });
+            }
         }
-        
     } catch (err) {
         console.error(err);
         next(err);
@@ -87,7 +89,10 @@ router.patch('/:id', async (req, res, next) => {
 
 router.delete('/:id', isLoggedIn, async (req, res, next) => {
     try{
-        await Introduction.destroy({ where: { id: req.params.id }});
+        const introduction = await Introduction.findOne({ where: { id: req.params.id } });
+        if (introduction.UserId === req.user.id) {
+            await Introduction.destroy({ where: { id: req.params.id }});
+        }
     } catch (error) {
         console.error(error);
         next(error);
