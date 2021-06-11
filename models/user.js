@@ -32,7 +32,7 @@ module.exports = class User extends Sequelize.Model {
     static associate(db) {
         db.User.hasMany(db.Question);
         db.User.hasMany(db.Answer);
-        db.User.hasOne(db.Introduction, { foreignKey: 'UserId', sourceKey: 'id' });
+        db.User.hasMany(db.Introduction);
         db.User.hasMany(db.Japan);
     }
 }

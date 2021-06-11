@@ -47,6 +47,22 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
     };
 });
 
+router.get('/:id', isLoggedIn, async (req, res, next) => {
+    try {
+        const introduction = await Introduction.findOne({
+            where: { UserId: req.params.id },
+        });
+        if (introduction) {
+            res.render('introduce.html', { introduction: introduction });
+        } else {
+            res.render('introduce.html', {});
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    };
+});
+
 const upload2 = multer();
 router.post('/introduce', isLoggedIn, upload2.none(), async (req, res, next) => {
     try{

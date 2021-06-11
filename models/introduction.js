@@ -24,6 +24,6 @@ module.exports = class Introduction extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Introduction.belongsTo(db.User, { foreignKey: 'UserId', targetKey: 'id' });
+        db.Introduction.belongsTo(db.User);
     }
 };
