@@ -2,8 +2,8 @@
 {% block content %}
     {% if japan.User.nick == user.nick %}
     <div class="text-right">
-        <a href="/qna" class="btn btn-default btn-sm pull-right" onclick="removeJapan(`{{japan.id}}`);">삭제</a>
-            <a href="/qna/ask/{{question.id}}" class="btn btn-default btn-sm pull-right" onclick="editJapan(`{{japan.id}}`)">수정</a>
+        <a href="/japan" class="btn btn-default btn-sm pull-right" onclick="removeJapan(`{{japan.id}}`);">삭제</a>
+        <a href="/japan/posting/{{japan.id}}" class="btn btn-default btn-sm pull-right" onclick="editJapan(`{{japan.id}}`)">수정</a>
     </div>
     {% endif %}
     <h2 class="text-center">{{japan.title}}</h2>
@@ -13,4 +13,14 @@
         <img id = "post-img" src="{{japan.img}}">
     </div>
     <div id="post-content">{{japan.content}}</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    function removeJapan(japanId) {
+        if (confirm('게시물을 삭제하시겠습니까?')) {
+            axios.delete(`/japan/${japanId}`);
+       }
+    };
+</script>
 {% endblock %}

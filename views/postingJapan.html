@@ -2,17 +2,25 @@
     
 {% block content %}
 {% if japan %}
-<form id="ask-form" action="/qna" method="GET">
+<form id="ask-form" action="/japan" method="GET">
     <div class="ask-head">
         <label for="ask-title">제목</label>
-        <input type="text" value="{{question.title}}" id="ask-title" class="form-control" maxlength="30" placeholder="title" name="title" required>
+        <input type="text" value="{{japan.title}}" id="ask-title" class="form-control" maxlength="30" placeholder="title" name="title" required>
     </div>
     <div class="ask-body">
         <label for="ask-content" id="content-label">내용</label>
-        <textarea id="ask-content" name="content" class="form-control" maxlength="800" rows="20" required>{{question.content}}</textarea>
+        <textarea id="ask-content" name="content" class="form-control" maxlength="800" rows="20" required>{{japan.content}}</textarea>
+    </div>
+    <div class="img-preview">
+        <img id="img-preview" src="{{japan.img}}"width="250" alt="미리보기">
+        <input id="img-url" type="hidden" name="url">
+    </div>
+    <div id="upload-img">
+        <label id="img-label" for="img">사진 업로드</label>
+        <input id="img" type="file" accept="image/*">
     </div>
 </form>
-<a href="/qna" class="btn btn-default" onclick="editQuestion(`{{question.id}}`)">수정</a>
+<a href="/japan" class="btn btn-default" onclick="editJapan(`{{japan.id}}`)">수정</a>
 {% else %}
 <form action="/japan" method="POST">
     <div class="ask-head">
@@ -53,5 +61,12 @@
                 console.error(err);
             });
         });
+
+        function editJapan(japanId) {
+            const title = document.querySelector('#ask-title').value;
+            const content = document.querySelector('#ask-content').value;
+            const url = document.querySelector('#img-preview').value;
+            axios.patch(`/japan/posting/${japanId}`, { title: title, content: content, url: url });
+        }
     </script>
 {% endblock %}

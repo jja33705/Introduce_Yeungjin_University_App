@@ -57,6 +57,13 @@ router.get('/posting', isLoggedIn, (req, res, next) => {
     res.render('postingJapan.html');
 });
 
+router.get('/posting/:id', isLoggedIn, async (req, res, next) => {
+    const japan = await Japan.findOne({
+        where: { id: req.params.id },
+    });
+    res.render('postingJapan.html', { japan: japan });
+});
+
 const upload = multer({
     storage: multer.diskStorage({
         destination(req,file, cb) {
@@ -73,6 +80,40 @@ const upload = multer({
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
     console.log(req.file);
     res.json({ url: `/img/${req.file.filename}` });
+});
+
+router.delete('/:id', isLoggedIn, async (req, res, next) => {
+    try{
+        await Japan.destroy({ where: { id: req.params.id }});
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
+router.patch('/posting/:id', isLoggedIn, async (req, res, next) => {
+    try {
+        if(req.body.url) {
+            await Japan.update({
+                title: req.body.title,
+                content: req.body.content,
+                img: req.body.url,
+            }, {
+                where: { id: req.params.id },
+            });
+        } else {
+            await Japan.update({
+                title: req.body.title,
+                content: req.body.content,
+            }, {
+                where: { id: req.params.id },
+            });
+        }
+        
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
 });
 
 
