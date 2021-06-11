@@ -5,11 +5,11 @@
 <form id="ask-form" action="/japan" method="GET">
     <div class="ask-head">
         <label for="ask-title">제목</label>
-        <input type="text" value="{{japan.title}}" id="ask-title" class="form-control" maxlength="30" placeholder="title" name="title" required>
+        <input type="text" value="{{japan.title}}" id="ask-title" class="form-control" maxlength="100" placeholder="title" name="title" required>
     </div>
     <div class="ask-body">
         <label for="ask-content" id="content-label">내용</label>
-        <textarea id="ask-content" name="content" class="form-control" maxlength="800" rows="20" required>{{japan.content}}</textarea>
+        <textarea id="ask-content" name="content" class="form-control" maxlength="1000" rows="20" required>{{japan.content}}</textarea>
     </div>
     <div class="img-preview">
         <img id="img-preview" src="{{japan.img}}"width="250" alt="미리보기">
@@ -25,11 +25,11 @@
 <form action="/japan" method="POST">
     <div class="ask-head">
         <label for="ask-title">제목</label>
-        <input type="text" class="form-control" maxlength="30" placeholder="title" name="title" required>
+        <input type="text" class="form-control" maxlength="100" placeholder="title" name="title" required>
     </div>
     <div class="ask-body">
         <label for="ask-content">내용</label>
-        <textarea name="content" class="form-control" maxlength="800" rows="20" required></textarea>
+        <textarea name="content" class="form-control" maxlength="1000" rows="20" required></textarea>
     </div>
     <div class="img-preview">
         <img id="img-preview" src=""

@@ -10,7 +10,7 @@
         {% endif %}
         <h2 class="text-center">{{question.title}}</h2>
         <div class="text-right">{{question.User.nick}}</div>
-        <div class="text-right">{{question.updatedAt}}</div>
+        <div class="text-right">{{question.createdAt}}</div>
         <div class="question-content" id="question-content">{{question.content}}</div>
     </div>
     {% if user %}
@@ -33,12 +33,12 @@
             <div class="clearfix">
                 <span class="pull-right"><a href="/qna/{{question.id}}" onclick="editAnswer(`{{answer.id}}`)">수정</a></span>
                 <span class="pull-right">&nbsp;&nbsp;</span>
-                <span class="pull-right"><a href="/qna/{{question.id}}" onclick="removeAnswer(`{{answer.id}}`);">삭제</a></span>
+                <span class="pull-right"><a href="/qna/{{quesstion.id}}" onclick="removeAnswer(`{{answer.id}}`);">삭제</a></span>
             </div>
             {% endif %}
             <div class="answer-header">
                 <span class="answer-auther">{{answer.User.nick}}</span>
-                <span class="answer-date">{{answer.updatedAt}}</span>
+                <span class="answer-date">{{answer.createdAt}}</span>
             </div>
             <div class="answer-content">{{answer.content}}</div>
         </div>
@@ -50,8 +50,8 @@
         function removeQuestion(questionId) {
             if (confirm('질문을 삭제하시겠습니까?')) {
                 axios.delete(`/qna/question/${questionId}`);
-            }
-        };
+           }
+        }; 
 
         function removeAnswer(answerId) {
             if (confirm('답변을 삭제하시겠습기까?')) {

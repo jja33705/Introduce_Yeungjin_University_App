@@ -20,7 +20,7 @@ router.get('/introduction', async (req, res, next) => {
             include: {
                 model: User,
             },
-            order: [['updatedAt', 'DESC']],
+            order: [['createdAt', 'DESC']],
         });
         res.render('introduction.html', { title: "자기소개", introductions: introductions });
     } catch (error) {
@@ -35,13 +35,13 @@ router.get('/japan', async (req, res, next) => {
             attributes: [
                 'id',
                 'title', 
-                [sequelize.fn('date_format', sequelize.col('Japan.updatedAt'), '%Y-%m-%d'), 'updatedAt'], 
+                [sequelize.fn('date_format', sequelize.col('Japan.createdAt'), '%Y-%m-%d'), 'createdAt'], 
                 'content', 'img'
             ],
             include: {
                 model: User,
             },
-            order: [['updatedAt', 'DESC']],
+            order: [['createdAt', 'DESC']],
         });
         res.render('japan.html', { title: '현지학기제' , japans: japans});
     } catch (err) {
@@ -57,13 +57,13 @@ router.get('/qna', async (req, res, next) => {
             attributes: [
                 'id',
                 'title', 
-                [sequelize.fn('date_format', sequelize.col('Question.updatedAt'), '%Y-%m-%d'), 'updatedAt'], 
+                [sequelize.fn('date_format', sequelize.col('Question.createdAt'), '%Y-%m-%d'), 'createdAt'], 
                 'content',
             ],
             include: {
                 model: User,
             },
-            order: [['updatedAt', 'DESC']],
+            order: [['createdAt', 'DESC']],
         });
         res.render('qna.html', { title: '질의응답',  questions: questions });
     } catch (err) {

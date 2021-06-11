@@ -37,7 +37,7 @@ router.get('/post/:id', async (req, res, next) => {
             attributes: [
                 'id',
                 'title', 
-                [sequelize.fn('date_format', sequelize.col('Japan.updatedAt'), '%Y-%m-%d'), 'updatedAt'], 
+                [sequelize.fn('date_format', sequelize.col('Japan.createdAt'), '%Y-%m-%d'), 'createdAt'], 
                 'content',
                 'img',
             ],

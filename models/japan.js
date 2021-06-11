@@ -4,11 +4,11 @@ module.exports = class Japan extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
             title: {
-                type: Sequelize.STRING(30),
+                type: Sequelize.STRING(100),
                 allowNull: false,
             },
             content: {
-                type: Sequelize.STRING(800),
+                type: Sequelize.STRING(1000),
                 allowNull: false,
             },
             img: {

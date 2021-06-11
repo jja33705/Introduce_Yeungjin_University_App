@@ -374,6 +374,7 @@ img {
 }
 
 #japan-content {
+  margin-top: 1%;
   white-space: normal;
   word-wrap: break-word;
 }
@@ -386,6 +387,7 @@ img {
 #post-img {
   height: 400px;
   width: auto;
+  margin-bottom: 1%;
 }
 
 #post-content {

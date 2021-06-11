@@ -56,7 +56,7 @@ router.get('/:id', async (req, res, next) => {
             attributes:  [
                 'id',
                 'title', 
-                [sequelize.fn('date_format', sequelize.col('Question.updatedAt'), '%Y-%m-%d'), 'updatedAt'], 
+                [sequelize.fn('date_format', sequelize.col('Question.createdAt'), '%Y-%m-%d'), 'createdAt'], 
                 'content',
             ],
             include: [{
@@ -65,18 +65,17 @@ router.get('/:id', async (req, res, next) => {
             where: {
                 id:  questionId,
             },
-            order: [['updatedAt', 'DESC']],
         });
         if (question) {
             const answers = await question.getAnswers({
                 attributes: [
-                    [sequelize.fn('date_format', sequelize.col('Answer.updatedAt'), '%Y-%m-%d'), 'updatedAt'], 
+                    [sequelize.fn('date_format', sequelize.col('Answer.createdAt'), '%Y-%m-%d'), 'createdAt'], 
                     'content', 'id'
                 ],
                 include: {
                     model: User,
                 },
-                order: [['updatedAt', 'DESC']],
+                order: [['createdAt', 'DESC']],
             });
             res.render('question.html', { question: question , answers: answers});
         } else {
