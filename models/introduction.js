@@ -3,6 +3,10 @@ const Sequelize = require('sequelize');
 module.exports = class Introduction extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
+            title: {
+                type: Sequelize.STRING(50),
+                allowNull: false,
+            },
             content: {
                 type: Sequelize.STRING(500),
                 allowNull: false,

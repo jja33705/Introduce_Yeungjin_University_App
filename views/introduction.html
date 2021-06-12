@@ -9,12 +9,14 @@
         {% for introduction in introductions %}
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
+                {% if introduction.img %}
                 <img src="{{introduction.img}}" alt="no image">
+                {% endif %}   
                 <div class="caption" id="introduction-caption">
-                    <h3>{{introduction.User.nick}}</h3>
+                    <h3>{{introduction.title}}</h3>
                     <p>{{introduction.content}}</p>
-                    {% if introduction.User.nick == user.nick %}
-                    <p><a href="/introduction/introduce/{{user.id}}" class="btn btn-default btn-sm" role="button">수정</a> <a href="/introduction" class="btn btn-default btn-sm" role="button" onclick="removeIntroduction(`{{introduction.id}}`)">삭제</a></p>
+                    {% if introduction.User.id == user.id %}
+                    <p><a href="/introduction/introduce/{{introduction.id}}" class="btn btn-default btn-sm" role="button">수정</a> <a href="/introduction" class="btn btn-default btn-sm" role="button" onclick="removeIntroduction(`{{introduction.id}}`)">삭제</a></p>
                     {% endif %}
                 </div>
                 </div>

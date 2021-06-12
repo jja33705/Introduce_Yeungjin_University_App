@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="question">
-        {% if question.User.nick == user.nick %}
+        {% if question.User.id == user.id %}
         <div class="clearfix">
             <a href="/qna" class="btn btn-default btn-sm pull-right" onclick="removeQuestion(`{{question.id}}`);">삭제</a>
             <a href="/qna/ask/{{question.id}}" class="btn btn-default btn-sm pull-right" onclick="editQuestion(`{{question.id}}`)">수정</a>
@@ -29,7 +29,7 @@
     {% endif %}
     {% for answer in answers %}
         <div class="answer">
-            {% if answer.User.nick == user.nick %}
+            {% if answer.User.id == user.id %}
             <div class="clearfix">
                 <span class="pull-right"><a href="/qna/{{question.id}}" onclick="editAnswer(`{{answer.id}}`)">수정</a></span>
                 <span class="pull-right">&nbsp;&nbsp;</span>

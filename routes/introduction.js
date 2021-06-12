@@ -31,32 +31,16 @@ router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
     res.json({ url: `/img/${req.file.filename}` });
 });
 
-router.get('/:id', isLoggedIn, async (req, res, next) => {
-    try {
-        const introduction = await Introduction.findOne({
-            where: { UserId: req.params.id },
-        });
-        if (introduction) {
-            res.render('introduce.html', { introduction: introduction });
-        } else {
-            res.render('introduce.html', {});
-        }
-    } catch (err) {
-        console.error(err);
-        next(err);
-    };
+router.get('/introduce', isLoggedIn, (req, res, next) => {
+    res.render('introduce.html', {});
 });
 
-router.get('/:id', isLoggedIn, async (req, res, next) => {
+router.get('/introduce/:id', isLoggedIn, async (req, res, next) => {
     try {
         const introduction = await Introduction.findOne({
-            where: { UserId: req.params.id },
+            where: { id: req.params.id },
         });
-        if (introduction) {
-            res.render('introduce.html', { introduction: introduction });
-        } else {
-            res.render('introduce.html', {});
-        }
+        res.render('introduce.html', { introduction: introduction });
     } catch (err) {
         console.error(err);
         next(err);
@@ -67,6 +51,7 @@ const upload2 = multer();
 router.post('/introduce', isLoggedIn, upload2.none(), async (req, res, next) => {
     try{
         const introduction = await Introduction.create({
+            title: req.body.title,
             content: req.body.content,
             img: req.body.url,
             UserId: req.user.id,
@@ -84,6 +69,7 @@ router.patch('/:id', async (req, res, next) => {
         if (introduction.UserId === req.user.id) {
             if(req.body.url) {
                 await Introduction.update({
+                    title: req.body.title,
                     content: req.body.content,
                     img: req.body.url,
                 }, {
@@ -91,6 +77,7 @@ router.patch('/:id', async (req, res, next) => {
                 });
             } else {
                 await Introduction.update({
+                    title: req.body.title,
                     content: req.body.content,
                 }, {
                     where: { id: req.params.id },

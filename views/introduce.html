@@ -3,6 +3,10 @@
 {% block content %}
     {% if introduction %}
     <form id="introduce-form" action="/introduction" method="GET">
+        <div class="ask-head">
+            <label for="introduce-title">제목</label>
+            <input type="text" value="{{japan.title}}" id="introduce-title" class="form-control" maxlength="50" placeholder="title" name="title" required>
+        </div>
         <label for="introduce-content" id="introduce-label">자기소개</label>
         <textarea id="introduce-content" name="content" class="form-control" maxlength="300" rows="8" required>{{introduction.content}}</textarea>
         <div class="img-preview">
@@ -21,6 +25,8 @@
     </form>
     {% else %}
     <form id="introduce-form" action="/introduction/introduce" method="post">
+        <label for="introduce-title">제목</label>
+        <input type="text" id="introduce-title" class="form-control" maxlength="50" placeholder="title" name="title" required>
         <label for="introduce-content" >자기소개</label>
         <textarea name="content" class="form-control" maxlength="300" rows="8" required></textarea>
         <div class="img-preview">
@@ -56,9 +62,10 @@
         });
 
         function editIntroduction(introductionId) {
+            const title = document.querySelector('#introduce-title').value;
             const content = document.querySelector('#introduce-content').value;
             const url = document.querySelector('#img-url').value;
-            axios.patch(`/introduction/${introductionId}`, { content: content, url: url });
+            axios.patch(`/introduction/${introductionId}`, { title: title, content: content, url: url });
         }
     </script>
 {% endblock %}

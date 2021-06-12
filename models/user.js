@@ -5,7 +5,7 @@ module.exports = class User extends Sequelize.Model {
         return super.init({
             email: {
                 type: Sequelize.STRING(40),
-                allowNull: false,
+                allowNull: true,
                 unique: true,
             },
             nick: {
@@ -14,6 +14,15 @@ module.exports = class User extends Sequelize.Model {
             },
             password: {
                 type: Sequelize.STRING(100),
+                allowNull: true,
+            },
+            provider: {
+                type: Sequelize.STRING(10),
+                allowNull: false,
+                defaultValue: 'local',
+            },
+            snsId: {
+                type: Sequelize.STRING(30),
                 allowNull: true,
             }
         }, {

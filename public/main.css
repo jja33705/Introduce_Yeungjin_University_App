@@ -287,6 +287,36 @@ aside {
   width: auto;
 } */
 
+* {
+  font-weight: bolder;
+  font-family: sans-serif;
+  font-size: 101%;
+}
+
+body {
+  background-size: 100%;
+  background-image: url("./배경2.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+section {
+  padding: 1%;
+  background-color: white;
+  opacity: 95%;
+  min-height: 600px;
+}
+
+#title {
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
+#title-small {
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
 img {
   height: 100%;
   width: auto;
@@ -324,6 +354,8 @@ img {
 #question-content {
   word-wrap: break-word;
   padding: 2%;
+  border-bottom: 1px solid silver;
+  margin-bottom: 1%;
 }
 
 .answer {
@@ -351,10 +383,18 @@ img {
   text-decoration: none;
 }
 
+#introduce-title {
+  margin-bottom: 1%;
+}
+
 #posting {
   display: inline-block;
   margin-bottom: 1%;
   text-decoration: none;
+}
+
+#japanPost {
+  background-color: white;
 }
 
 #japan-panel {
@@ -393,4 +433,5 @@ img {
 #post-content {
   white-space: normal;
   word-wrap: break-word;
+  padding: 1%;
 }

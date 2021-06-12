@@ -40,7 +40,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
                 console.error(loginError);
                 return next(loginError);
             }
-            return res.redirect('/introduction');
+            return res.redirect('/');
         });
     })(req, res, next);
 });
@@ -48,6 +48,14 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
     req.session.destroy();
+    res.redirect('/');
+});
+
+router.get('/kakao', isNotLoggedIn, passport.authenticate('kakao'));
+
+router.get('/kakao/callback', passport.authenticate('kakao', {
+    failureRedirect: '/',
+}), (req, res) => {
     res.redirect('/');
 });
 
