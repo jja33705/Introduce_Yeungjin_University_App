@@ -195,7 +195,6 @@ img {
 
 #school-number,
 #email {
-  text-align: center;
   font-size: 20px;
   margin-bottom: 5%;
   border-bottom: 1px solid silver;
@@ -209,7 +208,7 @@ img {
 }
 
 #recent-japan {
-  margin-bottom: 5%;
+  margin-bottom: 6%;
   display: flex;
   height: 60px;
 }
