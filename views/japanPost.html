@@ -1,13 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
-    {% if japan.User.id === user.id %}
     <div id="japanPost">
-        
-        {% endif %}
         <h2 class="text-center"  id="post-title">{{japan.title}}</h2>
         <div>
+            {% if japan.User.id === user.id %}
             <a href="/japan" class="btn btn-default btn-sm pull-left" onclick="removeJapan(`{{japan.id}}`);">삭제</a>
             <a href="/japan/posting/{{japan.id}}" class="btn btn-default btn-sm pull-left" onclick="editJapan(`{{japan.id}}`)">수정</a>
+            {% endif %}
         </div>
         <div>  
             <div class="text-right">{{japan.User.nick}}</div>

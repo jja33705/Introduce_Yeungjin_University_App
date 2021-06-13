@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="page-header">
-        <h1 id="title">&nbsp;&nbsp;&nbsp;일본에 가고자 하는 사람의 홈페이지<small id="title-small">&nbsp;&nbsp;JANG JAE HYEON</small></h1>
+        <h1 id="title">&nbsp;&nbsp;&nbsp;夢中<small id="title-small">&nbsp;&nbsp;JANG JAE HYEON</small></h1>
     </div>
     {% if not user %}
     <form class="form-horizontal" action="/auth/login" method="POST">
@@ -36,10 +36,17 @@
       <div id="index-aside">
         <div id="information">
           <div id="school-number">
-            2WDJ-1801242 장재현
+            <span>
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </span>
+            <span>&nbsp;2WDJ-1801242 장재현</span>
           </div>
           <div id="email">
-            jja33705@gmail.com
+            <span class="
+            glyphicon glyphicon-envelope" aria-hidden="true"></span>
+            </span>
+            <span>&nbsp;jja33705@gmail.com</span>
+            
           </div>
         </div>
         <div id="recent-post">
