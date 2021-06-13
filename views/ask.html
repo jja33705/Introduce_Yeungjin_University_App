@@ -12,7 +12,7 @@
             <textarea id="ask-content" name="content" class="form-control" maxlength="300" rows="8" required>{{question.content}}</textarea>
         </div>
     </form>
-    <a href="/qna" class="btn btn-default" onclick="editQuestion(`{{question.id}}`)">수정</a>
+    <a href="/qna/{{question.id}}" class="btn btn-default" onclick="editQuestion(`{{question.id}}`)">수정</a>
     {% else %}
     <form action="/qna/ask" method="POST">
         <div class="ask-head">

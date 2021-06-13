@@ -5,7 +5,7 @@
     <form id="introduce-form" action="/introduction" method="GET">
         <div class="ask-head">
             <label for="introduce-title">제목</label>
-            <input type="text" value="{{japan.title}}" id="introduce-title" class="form-control" maxlength="50" placeholder="title" name="title" required>
+            <input type="text" value="{{introduction.title}}" id="introduce-title" class="form-control" maxlength="50" placeholder="title" name="title" required>
         </div>
         <label for="introduce-content" id="introduce-label">자기소개</label>
         <textarea id="introduce-content" name="content" class="form-control" maxlength="300" rows="8" required>{{introduction.content}}</textarea>

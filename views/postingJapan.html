@@ -20,7 +20,7 @@
         <input id="img" type="file" accept="image/*">
     </div>
 </form>
-<a href="/japan" class="btn btn-default" onclick="editJapan(`{{japan.id}}`)">수정</a>
+<a href="/japan/post/{{japan.id}}" class="btn btn-default" onclick="editJapan(`{{japan.id}}`)">수정</a>
 {% else %}
 <form action="/japan" method="POST">
     <div class="ask-head">
