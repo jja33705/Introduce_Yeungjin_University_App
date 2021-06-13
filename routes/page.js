@@ -72,8 +72,26 @@ router.get('/qna', async (req, res, next) => {
     }
 });
 
-router.get('/', (req, res, next) => {
-    res.render('index.html');
+router.get('/', async (req, res, next) => {
+    try {
+        if(req.user) {
+            const japans = await Japan.findAll({
+                attributes: [
+                    'id',
+                    'title',
+                    'img',
+                ],
+                order: [['createdAt', 'DESC']],
+                limit: 5,
+            });
+            res.render('index.html', { japans: japans });
+        } else {
+            res.render('index.html');
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
 });
 
 module.exports = router;

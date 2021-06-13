@@ -66,21 +66,17 @@ router.get('/:id', async (req, res, next) => {
                 id:  questionId,
             },
         });
-        if (question) {
-            const answers = await question.getAnswers({
-                attributes: [
-                    [sequelize.fn('date_format', sequelize.col('Answer.createdAt'), '%Y-%m-%d'), 'createdAt'], 
-                    'content', 'id'
-                ],
-                include: {
-                    model: User,
-                },
-                order: [['createdAt', 'DESC']],
-            });
-            res.render('question.html', { question: question , answers: answers});
-        } else {
-            return res.redirect('/qna?error=noExist');
-        }
+        const answers = await question.getAnswers({
+            attributes: [
+                [sequelize.fn('date_format', sequelize.col('Answer.createdAt'), '%Y-%m-%d'), 'createdAt'], 
+                'content', 'id'
+            ],
+            include: {
+                model: User,
+            },
+            order: [['createdAt', 'DESC']],
+        });
+        res.render('question.html', { question: question , answers: answers});
     } catch (error) { 
         console.error(error);
         next(err);
@@ -99,7 +95,7 @@ router.delete('/question/:id', isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.post('/:id/answer', isLoggedIn, async (req, res, next) => {
+router.post('/answer/:id', isLoggedIn, async (req, res, next) => {
     const questionId = req.params.id;
     try {
         await Answer.create({

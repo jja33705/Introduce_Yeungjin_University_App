@@ -28,5 +28,38 @@
         </div>
       </div>
     </form>
+    {% else %}
+    <div id="index-container">
+      <div id="iframe-container">
+        <iframe id="iframe" width="560" height="315" src="https://www.youtube.com/embed/MhCrQDNPavU?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div id="index-aside">
+        <div id="information">
+          <div id="school-number">
+            2WDJ-1801242 장재현
+          </div>
+          <div id="email">
+            jja33705@gmail.com
+          </div>
+        </div>
+        <div id="recent-post">
+          <div id="recent-container">최근 게시물</div>
+            {% for japan in japans %}
+            <div id="recent-japan">
+              {% if japan.img %}
+              <div id="recent-img">
+                <img src="{{japan.img}}" alt="no image">
+              </div>
+              {% endif %}
+              <div id="recent-body">
+                <div id="recent-title"><a href="/japan/post/{{japan.id}}" id="recent-a">{{japan.title}}</a></div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
     {% endif %}
 {% endblock %}

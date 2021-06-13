@@ -14,7 +14,7 @@
         <div class="question-content" id="question-content">{{question.content}}</div>
     </div>
     {% if user %}
-    <form id="answer-form" action="/qna/{{question.id}}/answer" method="post">
+    <form id="answer-form" action="/qna/answer/{{question.id}}" method="post">
         <div class="row">
             <div class="col-lg-12">
               <div class="input-group">
@@ -22,17 +22,15 @@
                 <span class="input-group-btn">
                   <button class="btn btn-default" id="answer-button" type="submit">답변하기</button>
                 </span>
-              </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-          </div><!-- /.row -->
+              </div>
+            </div>
+          </div>
     </form>
     {% endif %}
     {% for answer in answers %}
         <div class="answer">
             {% if answer.User.id == user.id %}
             <div class="clearfix">
-                <span class="pull-right"><a href="/qna/{{question.id}}" onclick="editAnswer(`{{answer.id}}`)">수정</a></span>
-                <span class="pull-right">&nbsp;&nbsp;</span>
                 <span class="pull-right"><a href="/qna/{{question.id}}" onclick="removeAnswer(`{{answer.id}}`);">삭제</a></span>
             </div>
             {% endif %}
@@ -40,7 +38,7 @@
                 <span class="answer-auther">{{answer.User.nick}}</span>
                 <span class="answer-date">{{answer.createdAt}}</span>
             </div>
-            <div class="answer-content">{{answer.content}}</div>
+            <div class="answer-content" id="answer{{answer.id}}">{{answer.content}}</div>
         </div>
     {% endfor %}
 {% endblock %}
@@ -58,26 +56,5 @@
                 axios.delete(`/qna/answer/${answerId}`);
             }
         };
-
-        function editAnswer(answerId) {
-            
-        }
     </script>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 장재현은 바보구여 오늘 장재현때문에 무슨 일 있었는지 아시나요? 하...정말 오늘 정말 너무 말도 안되는 일이 있었지 뭐에요...정말 장재현 너무 사랑해! 너무 귀엽네여~ㅎㅎㅎㅎ
